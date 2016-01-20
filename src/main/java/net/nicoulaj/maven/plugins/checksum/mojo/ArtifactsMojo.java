@@ -79,6 +79,32 @@ public class ArtifactsMojo
     protected String csvSummaryFile;
 
     /**
+     * Indicates whether the build will store checksums to a single CSV summary file.
+     *
+     * @since 1.3
+     */
+    @Parameter( defaultValue = "false" )
+    protected boolean luaTable;
+
+    /**
+     * The name of the summary file created if the option is activated.
+     *
+     * @see #csvSummary
+     * @since 1.3
+     */
+    @Parameter( defaultValue = "checksums.lua" )
+    protected String luaTableFile;
+    
+    /**
+     * The name of the table object of lua script.
+     *
+     * @see #csvSummary
+     * @since 1.3
+     */
+    @Parameter( defaultValue = "_hubble.contentData" )
+    protected String  tableObjectName;
+    
+    /**
      * Indicates whether the build will store checksums to a single XML summary file.
      *
      * @since 1.0
@@ -182,6 +208,30 @@ public class ArtifactsMojo
         return csvSummaryFile;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    protected boolean isLuaTable()
+    {
+        return luaTable;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected String getLuaTableFile()
+    {
+        return luaTableFile;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected String getTableObjectName()
+    {
+    	return tableObjectName;
+    }
+    
     /**
      * {@inheritDoc}
      */

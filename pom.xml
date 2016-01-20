@@ -170,35 +170,7 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-invoker-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>run-integration-tests</id>
-            <goals>
-              <goal>install</goal>
-              <goal>run</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <localRepositoryPath>${project.build.directory}/it/local-repository</localRepositoryPath>
-          <showErrors>${debug}</showErrors>
-          <debug>${debug}</debug>
-          <settingsFile>${invoker.settings-file}</settingsFile>
-          <projectsDirectory>${project.basedir}/src/it/projects</projectsDirectory>
-          <pomIncludes>
-            <pomInclude>**/pom.xml</pomInclude>
-          </pomIncludes>
-          <cloneProjectsTo>${project.build.directory}/it/projects</cloneProjectsTo>
-          <reportsDirectory>${project.build.directory}/it/reports</reportsDirectory>
-          <addTestClassPath>true</addTestClassPath>
-          <goals>
-            <goal>clean</goal>
-            <goal>install</goal>
-          </goals>
-        </configuration>
-      </plugin>
+      
       <plugin>
         <artifactId>maven-plugin-plugin</artifactId>
         <configuration>

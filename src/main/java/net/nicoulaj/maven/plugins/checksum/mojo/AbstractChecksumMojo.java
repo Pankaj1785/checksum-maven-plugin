@@ -21,6 +21,7 @@ import net.nicoulaj.maven.plugins.checksum.execution.ExecutionException;
 import net.nicoulaj.maven.plugins.checksum.execution.FailOnErrorExecution;
 import net.nicoulaj.maven.plugins.checksum.execution.NeverFailExecution;
 import net.nicoulaj.maven.plugins.checksum.execution.target.CsvSummaryFileTarget;
+import net.nicoulaj.maven.plugins.checksum.execution.target.LuaTableFileTarget;
 import net.nicoulaj.maven.plugins.checksum.execution.target.MavenLogTarget;
 import net.nicoulaj.maven.plugins.checksum.execution.target.OneHashPerFileTarget;
 import net.nicoulaj.maven.plugins.checksum.execution.target.XmlSummaryFileTarget;
@@ -126,6 +127,14 @@ abstract class AbstractChecksumMojo
                 FileUtils.resolveFile( new File( project.getBuild().getDirectory() ), getCsvSummaryFile() ),
                 encoding ) );
         }
+        
+        if ( isLuaTable() )
+        {
+            execution.addTarget( new LuaTableFileTarget(
+                FileUtils.resolveFile( new File( project.getBuild().getDirectory() ), getLuaTableFile()),
+                encoding ,getTableObjectName()) );
+        }
+        
         if ( isXmlSummary() )
         {
             execution.addTarget( new XmlSummaryFileTarget(
@@ -159,6 +168,12 @@ abstract class AbstractChecksumMojo
     protected abstract boolean isCsvSummary();
 
     protected abstract String getCsvSummaryFile();
+    
+    protected abstract String getTableObjectName();
+    
+    protected abstract boolean isLuaTable();
+
+    protected abstract String getLuaTableFile();
 
     protected abstract boolean isXmlSummary();
 

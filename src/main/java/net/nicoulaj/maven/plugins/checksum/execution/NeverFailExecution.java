@@ -105,9 +105,22 @@ public class NeverFailExecution
                     {
                         try
                         {
+                        	// File (or directory) with new name
+                        	
+                			File file2 = new File(file.getAbsolutePath()+";"+hash);
+                			logger.info( file.getAbsolutePath()+";"+hash);
+                			if (file2.exists())
+                			   throw new java.io.IOException("file exists");
+
+                			// Rename file (or directory)
+                			boolean success = file.renameTo(file2);
                             target.write( hash, file, algorithm );
                         }
                         catch ( ExecutionTargetWriteException e )
+                        {
+                            logger.warn( e.getMessage() );
+                        }
+                        catch ( java.io.IOException e)
                         {
                             logger.warn( e.getMessage() );
                         }

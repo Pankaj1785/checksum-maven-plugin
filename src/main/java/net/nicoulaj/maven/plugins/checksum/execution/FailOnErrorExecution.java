@@ -81,6 +81,24 @@ public class FailOnErrorExecution
                         {
                             throw new ExecutionException( e.getMessage() );
                         }
+                        
+                        try
+                        {
+                        	// File (or directory) with new name
+                        	
+                			File file2 = new File(file.getAbsolutePath()+";"+hash);
+                			System.out.println(file.getAbsolutePath()+";"+hash);
+                			target.write( hash, file, algorithm );
+                			if (!file2.exists())
+                 			{
+                 					boolean success = file.renameTo(file2);  
+                 			}
+                        }
+                        catch ( ExecutionTargetWriteException e )
+                        {
+                        	 throw new ExecutionException( e.getMessage() );
+                        }
+                       
                     }
                 }
                 catch ( NoSuchAlgorithmException e )
